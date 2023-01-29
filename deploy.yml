@@ -2,10 +2,8 @@
 - name: "Apache installation using docker"
   hosts: prod
   become: true
-  vars_files:
-    - files/secrets/credentials.yml
   pre_tasks:
-    - name: Install some package 
+    - name: Install some package
       package: name='{{ item }}' state=present
       when: ansible_distribution == "CentOS"
       loop:
@@ -23,6 +21,7 @@
 
     - name: Install docker python
       pip: name=docker-py
+
   tasks:
     - name: Copy website file template
       template:
